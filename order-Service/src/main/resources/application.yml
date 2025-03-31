@@ -1,0 +1,24 @@
+resilience4j:
+  circuitbreaker:
+    instances:
+      paymentService:
+        failureRateThreshold: 50
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: 2s
+        waitDurationInOpenState: 10s
+        PermittedNumberOfCallsInHalfOpenState: 3
+        SlidingWindowSize : 10
+        SlidingWindowType : COUNT_BASED
+  retry :
+    instances:
+      paymentService:
+        maxAttempts: 3
+        waitDuration: 2s
+
+feign:
+  client:
+    config:
+      default:
+        connect-timeout : 5000
+        read-timeout : 5000
+        logger-level : FULL
